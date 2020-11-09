@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Varasto implements Varastoiva {
     
-    private Kirjanpito kirjanpito;
+    private Kirjaava kirjanpito;
     private HashMap<Tuote, Integer> saldot;  
     
-    public Varasto(Kirjanpito k) {
+    public Varasto(Kirjaava k) {
         kirjanpito = k;
         saldot = new HashMap<Tuote, Integer>();
         alustaTuotteet();

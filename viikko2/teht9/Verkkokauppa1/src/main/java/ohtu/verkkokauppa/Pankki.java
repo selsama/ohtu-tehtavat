@@ -2,9 +2,9 @@ package ohtu.verkkokauppa;
 
 public class Pankki implements Maksava {
 
-    private Kirjanpito kirjanpito;
+    private Kirjaava kirjanpito;
 
-    public Pankki(Kirjanpito k) {
+    public Pankki(Kirjaava k) {
         kirjanpito = k;
     }
 
