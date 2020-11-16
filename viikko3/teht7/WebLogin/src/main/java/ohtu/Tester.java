@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.*;
 
 public class Tester {
 
@@ -33,7 +34,7 @@ public class Tester {
         element.click();
 
         // uuden tunnuksen luominen
-
+        Random r = new Random(100000);
         sleep(2);
         
         element = driver.findElement(By.linkText("register new user"));
@@ -42,7 +43,7 @@ public class Tester {
         sleep(2);
         
         element = driver.findElement(By.name("username"));
-        element.sendKeys("matti");
+        element.sendKeys("matti"+r.nextInt());
         element = driver.findElement(By.name("password"));
         element.sendKeys("salasana1");
         element = driver.findElement(By.name("passwordConfirmation"));
