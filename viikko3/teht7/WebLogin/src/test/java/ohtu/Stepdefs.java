@@ -18,9 +18,7 @@ public class Stepdefs {
     
     @Given("login is selected")
     public void loginIsSelected() {
-        driver.get(baseUrl);
-        WebElement element = driver.findElement(By.linkText("login"));       
-        element.click();   
+        goToLoginPageFromFrontPage();
     }    
     
     @When("correct username {string} and password {string} are given")
@@ -61,9 +59,7 @@ public class Stepdefs {
     
     @Given("command new user is selected")
     public void newUserIsSelected() {
-        driver.get(baseUrl);
-        WebElement element = driver.findElement(By.linkText("register new user"));       
-        element.click();           
+         this.goToCreateNewUserPageFromFrontPage();
     }
     
     @When("a valid username {string} and password {string} and matching password confirmation are entered")
@@ -96,6 +92,30 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(error));
     }
     
+    @Given("user with username {string} with password {string} is successfully created")
+    public void userSuccessfullyCreated(String username, String password) {
+        goToCreateNewUserPageFromFrontPage();
+        createNewWith(username, password, password);
+        returnToFirstPageFromWelcomePage();
+    }
+    
+    @When("existing user info username {string} and password {string} are entered")
+    public void existingUserLogsIn(String username, String password) {
+        logInWith(username, password);
+    }
+    
+    @Given("user with username {string} and password {string} is tried to be created")
+    public void tryingToCreateUser(String username, String password) {
+        goToCreateNewUserPageFromFrontPage();
+        createNewWith(username, password, password);
+        returnToFrontPageFromCreateUserPage();
+    }
+    
+    @When("bad user info username {string} and password {string} are entered")
+    public void badUserInfoEntered(String username, String password) {
+        logInWith(username, password);
+    }
+    
     @After
     public void tearDown(){
         driver.quit();
@@ -126,5 +146,29 @@ public class Stepdefs {
         element.sendKeys(confirmation);
         element = driver.findElement(By.name("signup"));
         element.submit();
+    }
+    
+    private void returnToFirstPageFromWelcomePage() {
+        WebElement element = driver.findElement(By.linkText("continue to application mainpage"));
+        element.click();
+        element = driver.findElement(By.linkText("logout"));
+        element.click();
+    }
+    
+    private void goToLoginPageFromFrontPage() {
+        driver.get(baseUrl);
+        WebElement element = driver.findElement(By.linkText("login"));       
+        element.click();  
+    }
+    
+    private void goToCreateNewUserPageFromFrontPage() {
+        driver.get(baseUrl);
+        WebElement element = driver.findElement(By.linkText("register new user"));       
+        element.click();          
+    }
+    
+    private void returnToFrontPageFromCreateUserPage() {
+        WebElement element = driver.findElement(By.linkText("back to home"));
+        element.click();
     }
 }
