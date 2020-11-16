@@ -14,8 +14,11 @@ public class Player implements Comparable<Player> {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public String getNameAndNat() {
+        if (name.length() <= 10 ) {
+            return name + ", " + nationality + "\t";
+        }
+        return name + ", " + nationality;
     }
     
     public void setNationality(String nationality) {
@@ -32,7 +35,7 @@ public class Player implements Comparable<Player> {
 
     @Override
     public String toString() {
-        return name + ", " + nationality + ", score: " + assists + " + " + 
+        return this.getNameAndNat() + "\t score: " + assists + " + " + 
                 goals + " = " + this.getPoints() + ", penalties: " + penalties + ", "
                 + "team: " + team + ", games: " + games;
     }
