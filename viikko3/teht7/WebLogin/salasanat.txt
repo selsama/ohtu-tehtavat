@@ -1,4 +1,0 @@
-nette;salasana1
-sse;salasana1
-pekka;salasana1
-matti;salasana1
