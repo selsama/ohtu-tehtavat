@@ -18,7 +18,9 @@ public class QueryBuilder {
     }
     
     public Matcher build() {
-        return matcher;
+        Matcher toReturn = matcher;
+        matcher = new All();
+        return toReturn;
     }
     
     public QueryBuilder playsIn(String team) {
@@ -36,6 +38,9 @@ public class QueryBuilder {
         return this;
     }
     
-    
+    public QueryBuilder oneOf(Matcher... matchers) {
+        matcher = new Or(matchers);
+        return this;
+    }
     
 }
